@@ -11,9 +11,9 @@ var currentIndex = 0;
 var employees = JSON.parse(localStorage.getItem("employeesList")) == null ? [] : JSON.parse(localStorage.getItem("employeesList"));
 display();
 
-var nameCheack=false;
-var emailCheack=false;
-var ageCheack=false;
+var nameCheack = false;
+var emailCheack = false;
+var ageCheack = false;
 
 
 
@@ -21,11 +21,16 @@ var ageCheack=false;
 addBtn.onclick = function () {
     if (addBtn.innerHTML == "Add Cource") {
         addEmployee();
+
     } else {
         update();
     }
     display();
     clear();
+    nameCheack = false;
+    emailCheack = false;
+    ageCheack = false;
+    disabledOrNot();
 }
 
 function addEmployee() {
@@ -64,7 +69,7 @@ function display() {
     data.innerHTML = result;
 }
 
-function deleteEmp(index){
+function deleteEmp(index) {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -89,10 +94,14 @@ function deleteEmp(index){
 }
 
 
-function clear(){
+function clear() {
     for (var i = 0; i < (inputs.length); i++) {
         inputs[i].value = "";
     }
+
+    employeeAgeInput.classList.remove('is-valid');
+    employeeNameInput.classList.remove('is-valid');
+    employeeEmailInput.classList.remove('is-valid');
 }
 
 
@@ -175,10 +184,11 @@ function update() {
     })
 }
 
-function disabledOrNot(){
-    if(nameCheack&&ageCheack&&emailCheack){
+function disabledOrNot() {
+    if (nameCheack && ageCheack && emailCheack) {
         addBtn.removeAttribute("disabled");
-    }else{
+
+    } else {
         addBtn.setAttribute("disabled", "true");
     }
 }
@@ -186,13 +196,13 @@ function disabledOrNot(){
 employeeNameInput.onkeyup = function () {
     var namePattern = /^[A-Z][a-z]{2,7}$/;
     if (namePattern.test(employeeNameInput.value)) {
-        nameCheack=true;
+        nameCheack = true;
         disabledOrNot();
         employeeNameInput.classList.add('is-valid');
         employeeNameInput.classList.remove('is-invalid');
         nameAlert.classList.add('d-none');
     } else {
-        nameCheack=false;
+        nameCheack = false;
         disabledOrNot();
         employeeNameInput.classList.add('is-invalid');
         employeeNameInput.classList.remove('is-valid');
@@ -205,13 +215,13 @@ employeeNameInput.onkeyup = function () {
 employeeEmailInput.onkeyup = function () {
     var namePattern = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
     if (namePattern.test(employeeEmailInput.value)) {
-        emailCheack=true;
+        emailCheack = true;
         disabledOrNot();
         employeeEmailInput.classList.add('is-valid');
         employeeEmailInput.classList.remove('is-invalid');
         nameAlert.classList.add('d-none');
     } else {
-        emailCheack=false;
+        emailCheack = false;
         disabledOrNot();
         employeeEmailInput.classList.add('is-invalid');
         employeeEmailInput.classList.remove('is-valid');
@@ -224,13 +234,13 @@ employeeEmailInput.onkeyup = function () {
 employeeAgeInput.onkeyup = function () {
     var namePattern = /^(1[89]|[2-9]\d)$/;
     if (namePattern.test(employeeAgeInput.value)) {
-        ageCheack=true;
+        ageCheack = true;
         disabledOrNot();
         employeeAgeInput.classList.add('is-valid');
         employeeAgeInput.classList.remove('is-invalid');
         nameAlert.classList.add('d-none');
     } else {
-        ageCheack=false;
+        ageCheack = false;
         disabledOrNot();
         employeeAgeInput.classList.add('is-invalid');
         employeeAgeInput.classList.remove('is-valid');
