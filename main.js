@@ -11,6 +11,11 @@ var currentIndex = 0;
 var employees = JSON.parse(localStorage.getItem("employeesList")) == null ? [] : JSON.parse(localStorage.getItem("employeesList"));
 display();
 
+var nameCheack=false;
+var emailCheack=false;
+var ageCheack=false;
+
+
 
 
 addBtn.onclick = function () {
@@ -168,4 +173,68 @@ function update() {
         showConfirmButton: false,
         timer: 1500
     })
+}
+
+function disabledOrNot(){
+    if(nameCheack&&ageCheack&&emailCheack){
+        addBtn.removeAttribute("disabled");
+    }else{
+        addBtn.setAttribute("disabled", "true");
+    }
+}
+
+employeeNameInput.onkeyup = function () {
+    var namePattern = /^[A-Z][a-z]{2,7}$/;
+    if (namePattern.test(employeeNameInput.value)) {
+        nameCheack=true;
+        disabledOrNot();
+        employeeNameInput.classList.add('is-valid');
+        employeeNameInput.classList.remove('is-invalid');
+        nameAlert.classList.add('d-none');
+    } else {
+        nameCheack=false;
+        disabledOrNot();
+        employeeNameInput.classList.add('is-invalid');
+        employeeNameInput.classList.remove('is-valid');
+        nameAlert.classList.remove('d-none');
+
+    }
+}
+
+
+employeeEmailInput.onkeyup = function () {
+    var namePattern = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+    if (namePattern.test(employeeEmailInput.value)) {
+        emailCheack=true;
+        disabledOrNot();
+        employeeEmailInput.classList.add('is-valid');
+        employeeEmailInput.classList.remove('is-invalid');
+        nameAlert.classList.add('d-none');
+    } else {
+        emailCheack=false;
+        disabledOrNot();
+        employeeEmailInput.classList.add('is-invalid');
+        employeeEmailInput.classList.remove('is-valid');
+        nameAlert.classList.remove('d-none');
+
+    }
+}
+
+
+employeeAgeInput.onkeyup = function () {
+    var namePattern = /^(1[89]|[2-9]\d)$/;
+    if (namePattern.test(employeeAgeInput.value)) {
+        ageCheack=true;
+        disabledOrNot();
+        employeeAgeInput.classList.add('is-valid');
+        employeeAgeInput.classList.remove('is-invalid');
+        nameAlert.classList.add('d-none');
+    } else {
+        ageCheack=false;
+        disabledOrNot();
+        employeeAgeInput.classList.add('is-invalid');
+        employeeAgeInput.classList.remove('is-valid');
+        nameAlert.classList.remove('d-none');
+
+    }
 }
