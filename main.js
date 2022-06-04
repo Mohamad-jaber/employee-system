@@ -160,6 +160,11 @@ function getEmpData(i) {
     employeeAgeInput.value = update.age;
     addBtn.innerHTML = "update ";
     currentIndex = i;
+    nameCheack = true;
+    emailCheack = true;
+    ageCheack = true;
+    disabledOrNot();
+    
 }
 
 function update() {
